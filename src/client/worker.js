@@ -1,1 +1,1 @@
-console.log(5 ** 2);
+self.postMessage('Worker installed');

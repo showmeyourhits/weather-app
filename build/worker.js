@@ -1,1 +1,1 @@
-!function(){"use strict";console.log(25)}();
+!function(){"use strict";self.postMessage("Worker installed")}();

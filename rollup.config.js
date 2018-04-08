@@ -1,9 +1,14 @@
 import path from 'path';
+import identity from 'lodash.identity';
+
+// Rollup Plugins
 import copy from 'rollup-plugin-copy';
 import uglify from 'rollup-plugin-uglify';
+import serve from 'rollup-plugin-serve';
 
+// Constants
 const CLIENT_SRC = 'src/client';
-const isProd = process.env.BUILD === 'prodcution';
+const isProd = process.env.BUILD === 'production';
 
 export default [{
     input: path.resolve(CLIENT_SRC, 'app.js'),
@@ -17,8 +22,13 @@ export default [{
             [path.resolve(CLIENT_SRC, 'styles.css')]: 'build/styles.css',
             verbose: true,
         }),
-        uglify(),
-    ],
+        isProd ? uglify() : null,
+        !isProd ? serve({
+            contentBase: './build',
+            port: '6061',
+            open: true,
+        }) : null,
+    ].filter(identity),
     watch: {
         include: 'src/**'
     }
@@ -29,6 +39,10 @@ export default [{
         file: 'build/worker.js'
     },
     plugins: [
-        uglify(),
-    ]
+        copy({
+            ['src/server/data']: 'build/data',
+            verbose: true,
+        }),
+        isProd ? uglify() : null,
+    ].filter(identity),
 }];

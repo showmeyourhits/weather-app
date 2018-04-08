@@ -6,15 +6,20 @@
   "scripts": {
     "build": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
     "stage": "git add .",
+    "lint": "eslint ./src/**",
     "dev": "rollup -c --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "showmeyourhits",
   "license": "WTFPL",
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.10.0",
+    "lodash.identity": "^3.0.0",
     "pre-commit": "1.2.2",
     "rollup": "0.57.1",
     "rollup-plugin-copy": "0.2.3",
+    "rollup-plugin-serve": "^0.4.2",
     "rollup-plugin-uglify": "3.0.0"
   },
   "pre-commit": [
