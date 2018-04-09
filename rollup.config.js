@@ -19,6 +19,7 @@ export default [{
     plugins: [
         copy({
             [path.resolve(CLIENT_SRC, 'index.html')]: 'build/index.html',
+            [path.resolve(CLIENT_SRC, 'favicon.ico')]: 'build/favicon.ico',
             [path.resolve(CLIENT_SRC, 'styles.css')]: 'build/styles.css',
             verbose: true,
         }),
