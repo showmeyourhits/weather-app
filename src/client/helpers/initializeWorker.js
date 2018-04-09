@@ -1,7 +1,7 @@
+import {handleAppMessage} from './appHandlers';
+
 const worker = new Worker('./worker.js');
 
-worker.onmessage = function(event) {
-    console.log('Recieved from worker', event.data);
-}
+worker.onmessage = handleAppMessage;
 
 export {worker};

@@ -8,18 +8,26 @@
     "stage": "git add .",
     "lint": "eslint ./src/**",
     "dev": "rollup -c --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-dev": "jest --watch",
+    "test": "jest"
   },
   "author": "showmeyourhits",
   "license": "WTFPL",
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-import": "^2.10.0",
-    "lodash.identity": "^3.0.0",
+    "babel-core": "6.26.0",
+    "babel-jest": "22.4.3",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-stage-0": "6.24.1",
+    "eslint": "4.19.1",
+    "eslint-plugin-import": "2.10.0",
+    "eslint-plugin-jest": "21.15.0",
+    "jest": "22.4.3",
+    "lodash.identity": "3.0.0",
     "pre-commit": "1.2.2",
+    "regenerator-runtime": "0.11.1",
     "rollup": "0.57.1",
     "rollup-plugin-copy": "0.2.3",
-    "rollup-plugin-serve": "^0.4.2",
+    "rollup-plugin-serve": "0.4.2",
     "rollup-plugin-uglify": "3.0.0"
   },
   "pre-commit": [
