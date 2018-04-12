@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Усредненная погодная сводка</title>
+    <title>Погода г. N с 1881г. по 2006г.</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./styles.css">
 </head>
@@ -16,9 +16,9 @@
             <button class="btn btn--selected" type="submit" value="temperature" name="type">Температура</button>
             <button class="btn" type="submit" value="precipitation" name="type">Осадки</button>
         </div>
-        <div>
-            <select name="start_date" id="select-start-date" class="btn--select"></select>
-            <select name="end_date" id="select-end-date" class="btn--select"></select>
+        <div class="controls-selects">
+            От <select name="start_date" id="select-start-date" class="btn btn--select"></select>
+            До <select name="end_date" id="select-end-date" class="btn btn--select"></select>
         </div>
     </form>
     <main>
