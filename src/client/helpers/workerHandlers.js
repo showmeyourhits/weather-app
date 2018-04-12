@@ -21,8 +21,6 @@ export function handleWorkerMessage(event) {
  * @param {RequestData} data Request data
  */
 export async function handleDataRequest({route, params}) {
-    console.log(`should request on route: "${route}" with params`, params);
-
     switch(route) {
     case temperatureRoute:
     case precipitationRoute:

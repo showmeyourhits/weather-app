@@ -20,3 +20,28 @@ export function createAction(type, creator = identity) {
         };
     };
 }
+
+/**
+ * Options generator for select.
+ *
+ * @param {number} startValue 
+ * @param {number} endValue 
+ * @returns {DocumentFragment}
+ */
+export function getOptionsList(startValue, endValue) {
+    const fragment = document.createDocumentFragment();
+    let currentValue = startValue;
+
+    while (currentValue <= endValue) {
+        const option = document.createElement('option');
+
+        option.textContent = currentValue;
+        option.value = currentValue;
+
+        fragment.appendChild(option);
+
+        currentValue++;
+    }
+
+    return fragment;
+}

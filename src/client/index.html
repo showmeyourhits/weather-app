@@ -11,16 +11,16 @@
 </head>
 
 <body>
-    <aside class="controls" id="some">
+    <form class="controls" id="controls">
         <div>
-            <button class="btn" type="submit" name="temperature">Температура</button>
-            <button class="btn" type="submit" name="precipitation">Осадки</button>
+            <button class="btn btn--selected" type="submit" value="temperature" name="type">Температура</button>
+            <button class="btn" type="submit" value="precipitation" name="type">Осадки</button>
         </div>
         <div>
-            <select name="start_date" id="" class="btn--select"></select>
-            <select name="end_date" id="" class="btn--select"></select>
+            <select name="start_date" id="select-start-date" class="btn--select"></select>
+            <select name="end_date" id="select-end-date" class="btn--select"></select>
         </div>
-    </aside>
+    </form>
     <main>
         <canvas id="data-grid"></canvas>
     </main>
