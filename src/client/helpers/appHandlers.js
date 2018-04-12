@@ -2,6 +2,7 @@ import {worker} from './initializeWorker';
 import {RECIEVE_DATA, ERROR} from './actionTypes';
 import {endSelectID, startSelectID} from './appConstants';
 import {fetchData} from './appActions';
+import {drawGraph, clearCanvas, drawGrid} from './canvasHelpers';
 
 export function handleAppMessage(event) {
     try {
@@ -9,6 +10,9 @@ export function handleAppMessage(event) {
 
         switch (data.type) {
         case RECIEVE_DATA:
+            clearCanvas();
+            drawGrid();
+            drawGraph(data.payload);
             console.log('Client recieved', data.payload);
             break;
         case ERROR:

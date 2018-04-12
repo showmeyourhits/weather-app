@@ -1,3 +1,4 @@
+import './initializeCanvas';
 import {END_YEAR, START_YEAR, startSelectID, endSelectID} from './appConstants';
 import {getOptionsList} from './utils';
 import {handleSelectChange, handleFormSubmit, handleTypeClick} from './appHandlers';
