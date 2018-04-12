@@ -13,7 +13,7 @@ export function promisifyRequest(request) {
 }
 
 /**
- * @param {{start_date: string, end_date: string}} params
+ * @param {{start_date: string, end_date: string}}  params
  * @returns {IDBKeyRange}
  */
 export function getIDBKeyRange({start_date: startDate, end_date: endDate}) {

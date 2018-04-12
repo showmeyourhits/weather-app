@@ -2,9 +2,41 @@ html, body {
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: #fafafa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #212121; 
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    flex-basis: 250px;
+}
+
+.btn {
+    padding: 0 8px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.5em;
+    outline: none;
+    transition: color .3s, background-color .3s;
 }
 
 .btn--selected {
-    font-weight: 700;
+    color: black;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.data-grid {
+    border: 2px solid white;
+    width: 600px;
+    height: 400px;
 }
