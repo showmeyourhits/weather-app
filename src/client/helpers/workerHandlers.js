@@ -1,5 +1,5 @@
 import {createError, sendResponse} from './workerActions';
-import {promisifyRequest} from './dbHelpers';
+import {promisifyRequest, getIDBKeyRange} from './dbHelpers';
 import {FETCH_DATA, temperatureRoute, precipitationRoute} from './actionTypes';
 
 export function handleWorkerMessage(event) {
@@ -40,10 +40,18 @@ export async function handleDataRequest({route, params}) {
                 });
             }
 
-            self.postMessage(sendResponse(route, 200));
+            objectStore = db.transaction(route, 'readonly').objectStore(route);
+
+            const data = await promisifyRequest(objectStore.getAll(getIDBKeyRange(params)));
+
+            self.postMessage(sendResponse(route, 200, reduceToMean(data)));
         } catch (error) {
             console.error(error);
         }
         break;
     }
+}
+
+export function reduceToMean(list, count = 12) {
+    return list.slice(0, count);
 }

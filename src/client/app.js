@@ -1,6 +1,4 @@
-import {worker} from './helpers/initializeWorker';
-import {fetchData} from './helpers/appActions';
-import {temperatureRoute} from './helpers/actionTypes';
 import './helpers/initializeUI';
+import {requestData} from './helpers/appHandlers';
 
-worker.postMessage(fetchData(temperatureRoute));
+requestData();

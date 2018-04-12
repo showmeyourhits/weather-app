@@ -11,3 +11,14 @@ export function promisifyRequest(request) {
         request.onerror = reject;
     });
 }
+
+/**
+ * @param {{start_date: string, end_date: string}} params
+ * @returns {IDBKeyRange}
+ */
+export function getIDBKeyRange({start_date: startDate, end_date: endDate}) {
+    return IDBKeyRange.bound(
+        `${startDate}-01-01`,
+        `${endDate}-12-12`,
+    );
+}
