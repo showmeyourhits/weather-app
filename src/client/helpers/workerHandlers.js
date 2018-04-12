@@ -1,4 +1,5 @@
 import {createError, sendResponse} from './workerActions';
+import {promisifyRequest} from './dbHelpers';
 import {FETCH_DATA, temperatureRoute, precipitationRoute} from './actionTypes';
 
 export function handleWorkerMessage(event) {
@@ -26,11 +27,22 @@ export async function handleDataRequest({route, params}) {
     case temperatureRoute:
     case precipitationRoute:
         try {
+            const db = await self.dbPromise;
 
-            const response = await fetch(`./data/${route}.json`);
-            const data = await response.json();
+            let objectStore = db.transaction(route, 'readonly').objectStore(route);
+            const valuesCount = await promisifyRequest(objectStore.count());
 
-            self.postMessage(sendResponse(route, 200, data));
+            if (!valuesCount) {
+                const response = await fetch(`./data/${route}.json`);
+                const data = await response.json();
+                
+                objectStore = db.transaction(route, 'readwrite').objectStore(route);
+                data.forEach(item => {
+                    objectStore.add(item);
+                });
+            }
+
+            self.postMessage(sendResponse(route, 200));
         } catch (error) {
             console.error(error);
         }
