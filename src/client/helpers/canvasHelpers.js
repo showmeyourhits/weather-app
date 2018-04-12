@@ -1,8 +1,7 @@
 import {temperatureRoute} from './actionTypes';
+import {POINT_COUNT} from './appConstants';
 
 let canvasElement;
-
-export const POINT_COUNT = 12;
 
 export function getCanvasElement() {
     if (!canvasElement) {
@@ -40,7 +39,7 @@ export function drawGrid() {
     const xPoints = getXPoints(width, POINT_COUNT);
 
     // verticals
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'rgba(255,255,255, 0.5)';
     xPoints.forEach(x => {
         ctx.fillRect(x, 0, 2, height);
     });
@@ -50,6 +49,8 @@ export function drawGrid() {
 }
 
 export function drawGraph({data, route}) {
+    const isTemperature = route === temperatureRoute;
+
     const ctx = getCanvasElement().getContext('2d');
     const {height, width} = ctx.canvas;
     const xPoints = getXPoints(width, POINT_COUNT);
@@ -73,8 +74,8 @@ export function drawGraph({data, route}) {
     ctx.stroke();
 
     ctx.fillStyle = 'white';
-    ctx.font = '14px Arial';
-    const label = route === temperatureRoute ? '°' : 'мм.';
+    ctx.font = `${isTemperature ? 14 : 12}px Arial`;
+    const label = isTemperature ? '°' : 'мм.';
     xPoints.forEach((x, index) => {
         const pointData = data[index];
         ctx.fillText(`${pointData.v}${label}`, x + 4, centerY + pointData.v * 3 - 4);

@@ -1,6 +1,7 @@
 import {createError, sendResponse} from './workerActions';
 import {promisifyRequest, getIDBKeyRange} from './dbHelpers';
 import {FETCH_DATA, temperatureRoute, precipitationRoute} from './actionTypes';
+import {POINT_COUNT} from './appConstants';
 
 export function handleWorkerMessage(event) {
     try {
@@ -52,6 +53,31 @@ export async function handleDataRequest({route, params}) {
     }
 }
 
-export function reduceToMean(list, count = 12) {
-    return list.slice(0, count);
+export const roundToPrecision = (number, precision = 2) =>
+    `${Math.round(parseFloat(number) * (10 ** precision)) / (10 ** precision)}`;
+
+export function reduceToMean(list, count = POINT_COUNT) {
+    const groupCount = Math.floor(list.length / count);
+
+    return list
+        .reduce((groups, item, index) => {
+            let groupIndex = Math.floor(index / groupCount);
+
+            if (groupIndex >= count) {
+                groupIndex = count - 1;
+            }
+
+            if (!groups[groupIndex]) {
+                groups[groupIndex] = [];
+            }
+
+            groups[groupIndex].push(item);
+
+            return groups;
+        }, [])
+        .map((group) => {
+            const groupLen = group.length;
+
+            return {v: roundToPrecision(group.reduce((sum, item) => item.v + sum, 0) / groupLen)};
+        });
 }
