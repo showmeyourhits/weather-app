@@ -11,6 +11,19 @@ export function getCanvasElement() {
 }
 
 
+export function setCanvasSize() {
+    const canvas = getCanvasElement();
+
+    if (window.innerWidth < 768) {
+        canvas.height = 400;
+        canvas.width = window.innerWidth - 20;
+    } else {
+        canvas.height = 400;
+        canvas.width = 600;
+    }
+}
+
+
 /**
  * Get x coordinates for column grids.
  *

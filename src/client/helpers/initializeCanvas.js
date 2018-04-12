@@ -1,3 +1,4 @@
-import {drawGrid} from './canvasHelpers';
+import {drawGrid, setCanvasSize} from './canvasHelpers';
 
+setCanvasSize();
 drawGrid();
